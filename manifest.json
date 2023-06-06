@@ -1,20 +1,13 @@
 {
   "manifest_version": 2,
-  "name": "GitHub PR Approver",
+  "name": "DnD Spell Generator",
   "version": "1.0",
-  "description": "Automatically generates approval messages with DnD 5e spell references for GitHub PRs",
+  "description": "Automatically generates approval messages with DnD 5e spell references",
   "browser_action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "images/icon16.png",
-      "48": "images/icon48.png",
-      "128": "images/icon128.png"
-    }
+    "default_popup": "popup.html"
   },
   "icons": {
-    "16": "images/icon16.png",
-    "48": "images/icon48.png",
-    "128": "images/icon128.png"
+    "128": "dnddice.png"
   }
 }
 

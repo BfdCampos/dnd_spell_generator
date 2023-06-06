@@ -2,6 +2,9 @@
 fetch("spells.json")
   .then((response) => response.json())
   .then((data) => {
+    // Get the output element
+    const output = document.getElementById("output");
+
     // Set up the click event listener
     document.getElementById("fillSpell").addEventListener("click", () => {
       // Select a random spell
@@ -14,9 +17,16 @@ fetch("spells.json")
       )}`;
       const message = `Level ${spell.Level} ${spell.School} spell: [${spell.Name}](${url})`;
 
-      // Log the message for now
-      console.log(message);
-
-      // Code to fill the text field will go here
+      // Copy the message to the clipboard
+      navigator.clipboard.writeText(message).then(
+        function () {
+          // Show success message
+          output.textContent = `${message} copied to clipboard!`;
+        },
+        function () {
+          // Show error message
+          output.textContent = "Failed to copy message to clipboard.";
+        }
+      );
     });
   });
