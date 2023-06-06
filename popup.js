@@ -9,40 +9,41 @@ fetch("spells.json")
     const output = document.getElementById("output");
     const clipboardMessage = document.getElementById("clipboardMessage");
 
-    // Get the button
-    const fillSpellButton = document.getElementById("fillSpell");
-
-    // Set up the click event listener
-    fillSpellButton.addEventListener("click", () => {
+    // Create a function that fills the output with a spell and copies it to clipboard
+    const fillSpell = () => {
       // Select a random spell
       const spell = spells[Math.floor(Math.random() * spells.length)];
 
       // Build the URL and message
-      const url = `https://www.dndbeyond.com/spells/${spell.Name.toLowerCase().replace(
+      const url = `http://dnd5e.wikidot.com/spell:${spell.Name.toLowerCase().replace(
         / /g,
         "-"
       )}`;
-      const message = `Level ${spell.Level} ${spell.School} spell: [${spell.Name}](${url})`;
+      const message = `[${spell.Name}](${url})\nLevel ${spell.Level} ${spell.School} spell`;
 
       // Display the message
       output.textContent = message;
 
-      // Delay the clipboard copy by 100 milliseconds
-      setTimeout(() => {
-        navigator.clipboard.writeText(message).then(
-          function () {
-            // Show success message
-            clipboardMessage.textContent = "Copied to clipboard!";
-          },
-          function () {
-            // Show error message
-            clipboardMessage.textContent =
-              "Failed to copy message to clipboard.";
-          }
-        );
-      }, 100);
-    });
+      // Copy the message to the clipboard
+      navigator.clipboard.writeText(message).then(
+        function () {
+          // Show success message
+          clipboardMessage.textContent = "Copied to clipboard!";
+        },
+        function () {
+          // Show error message
+          clipboardMessage.textContent = "Failed to copy message to clipboard.";
+        }
+      );
+    };
 
-    // Trigger a click event on the button when the popup opens
-    fillSpellButton.click();
+    // Set up the click event listener
+    document.getElementById("fillSpell").addEventListener("click", fillSpell);
+
+    // Set up the key press event listener
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        fillSpell();
+      }
+    });
   });
