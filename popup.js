@@ -9,17 +9,20 @@ fetch("spells.json")
     const output = document.getElementById("output");
     const clipboardMessage = document.getElementById("clipboardMessage");
 
+    // Get the button
+    const fillSpellButton = document.getElementById("fillSpell");
+
     // Set up the click event listener
-    document.getElementById("fillSpell").addEventListener("click", () => {
+    fillSpellButton.addEventListener("click", () => {
       // Select a random spell
       const spell = spells[Math.floor(Math.random() * spells.length)];
 
       // Build the URL and message
-      const url = `http://dnd5e.wikidot.com/spell:${spell.Name.toLowerCase().replace(
+      const url = `https://www.dndbeyond.com/spells/${spell.Name.toLowerCase().replace(
         / /g,
         "-"
       )}`;
-      const message = `[${spell.Name}](${url})\nLevel ${spell.Level} ${spell.School} spell`;
+      const message = `Level ${spell.Level} ${spell.School} spell: [${spell.Name}](${url})`;
 
       // Display the message
       output.textContent = message;
@@ -36,4 +39,6 @@ fetch("spells.json")
         }
       );
     });
+    // Trigger a click event on the button when the popup opens
+    fillSpellButton.click();
   });
