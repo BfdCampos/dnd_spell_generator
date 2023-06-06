@@ -18,7 +18,7 @@ fetch("spells.json")
       const spell = spells[Math.floor(Math.random() * spells.length)];
 
       // Build the URL and message
-      const url = `http://dnd5e.wikidot.com/spell:${spell.Name.toLowerCase().replace(
+      const url = `https://www.dndbeyond.com/spells/${spell.Name.toLowerCase().replace(
         / /g,
         "-"
       )}`;
