@@ -19,7 +19,7 @@ fetch("spells.json")
         / /g,
         "-"
       )}`;
-      const message = `Level ${spell.Level} ${spell.School} spell: [${spell.Name}](${url})`;
+      const message = `[${spell.Name}](${url})\nLevel ${spell.Level} ${spell.School} spell`;
 
       // Display the message
       output.textContent = message;
