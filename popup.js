@@ -2,6 +2,9 @@
 fetch("spells.json")
   .then((response) => response.json())
   .then((data) => {
+    // This will force the focus on the popup
+    document.getElementById("focus-trap").focus();
+
     // Filter the spells
     const spells = data.filter((spell) => spell.Source === "Players Handbook");
 
