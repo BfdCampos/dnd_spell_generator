@@ -27,18 +27,22 @@ fetch("spells.json")
       // Display the message
       output.textContent = message;
 
-      // Copy the message to the clipboard
-      navigator.clipboard.writeText(message).then(
-        function () {
-          // Show success message
-          clipboardMessage.textContent = "Copied to clipboard!";
-        },
-        function () {
-          // Show error message
-          clipboardMessage.textContent = "Failed to copy message to clipboard.";
-        }
-      );
+      // Delay the clipboard copy by 100 milliseconds
+      setTimeout(() => {
+        navigator.clipboard.writeText(message).then(
+          function () {
+            // Show success message
+            clipboardMessage.textContent = "Copied to clipboard!";
+          },
+          function () {
+            // Show error message
+            clipboardMessage.textContent =
+              "Failed to copy message to clipboard.";
+          }
+        );
+      }, 100);
     });
+
     // Trigger a click event on the button when the popup opens
     fillSpellButton.click();
   });
