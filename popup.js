@@ -2,30 +2,37 @@
 fetch("spells.json")
   .then((response) => response.json())
   .then((data) => {
-    // Get the output element
+    // Filter the spells
+    const spells = data.filter((spell) => spell.Source === "Players Handbook");
+
+    // Get the output and clipboardMessage elements
     const output = document.getElementById("output");
+    const clipboardMessage = document.getElementById("clipboardMessage");
 
     // Set up the click event listener
     document.getElementById("fillSpell").addEventListener("click", () => {
       // Select a random spell
-      const spell = data[Math.floor(Math.random() * data.length)];
+      const spell = spells[Math.floor(Math.random() * spells.length)];
 
       // Build the URL and message
-      const url = `https://www.dndbeyond.com/spells/${spell.Name.toLowerCase().replace(
+      const url = `http://dnd5e.wikidot.com/spell:${spell.Name.toLowerCase().replace(
         / /g,
         "-"
       )}`;
       const message = `Level ${spell.Level} ${spell.School} spell: [${spell.Name}](${url})`;
 
+      // Display the message
+      output.textContent = message;
+
       // Copy the message to the clipboard
       navigator.clipboard.writeText(message).then(
         function () {
           // Show success message
-          output.textContent = `${message} copied to clipboard!`;
+          clipboardMessage.textContent = "Copied to clipboard!";
         },
         function () {
           // Show error message
-          output.textContent = "Failed to copy message to clipboard.";
+          clipboardMessage.textContent = "Failed to copy message to clipboard.";
         }
       );
     });
