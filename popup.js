@@ -18,10 +18,9 @@ fetch("spells.json")
       const spell = spells[Math.floor(Math.random() * spells.length)];
 
       // Build the URL and message
-      const url = `https://www.dndbeyond.com/spells/${spell.Name.toLowerCase().replace(
-        / /g,
-        "-"
-      )}`;
+      const url = `https://www.dndbeyond.com/spells/${spell.Name.toLowerCase()
+        .replace(/ /g, "-")
+        .replace(/'/g, "")}`;
       const message = `[${spell.Name}](${url})\nLevel ${spell.Level} ${spell.School} spell`;
 
       // Display the message
