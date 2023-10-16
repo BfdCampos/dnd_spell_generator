@@ -1,7 +1,7 @@
 {
-  "name": "dnd_spell_generator",
+  "name": "pantheon_generator",
   "version": "1.0.0",
-  "description": "A repo to create a web extension that generates a random DnD 5e spell.",
+  "description": "A repo to create a web extension that generates a random deity or god with additional information.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

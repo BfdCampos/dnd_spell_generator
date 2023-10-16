@@ -1,27 +1,26 @@
 // Use the Fetch API to get the JSON data
-fetch("spells.json")
+fetch("data/greek.json")
   .then((response) => response.json())
   .then((data) => {
     // This will force the focus on the popup
     document.getElementById("focus-trap").focus();
-
-    // Filter the spells
-    const spells = data.filter((spell) => spell.Source === "Players Handbook");
 
     // Get the output and clipboardMessage elements
     const output = document.getElementById("output");
     const clipboardMessage = document.getElementById("clipboardMessage");
 
     // Create a function that fills the output with a spell and copies it to clipboard
-    const fillSpell = () => {
+    const fillDeity = () => {
       // Select a random spell
-      const spell = spells[Math.floor(Math.random() * spells.length)];
-
+      const god = data[Math.floor(Math.random() * data.length)];
+      
       // Build the URL and message
-      const url = `https://www.dndbeyond.com/spells/${spell.Name.toLowerCase()
+      const url = `https://www.google.com/search?q=${god.deity_name.toLowerCase()}+${god.pantheon.toLowerCase()}
         .replace(/ /g, "-")
         .replace(/'/g, "")}`;
-      const message = `[${spell.Name}](${url})\nLevel ${spell.Level} ${spell.School} spell`;
+      const message = `[${god.deity_name} - ${god.pantheon}](${url})\nSymbol: ${god.symbol}\nStories:\n${god.stories.map(
+        (story, index) => `  ${index + 1}. ${story.title} - ${story.description}`
+      ).join('\n')}`;
 
       // Display the message
       output.textContent = message;
@@ -40,12 +39,12 @@ fetch("spells.json")
     };
 
     // Set up the click event listener
-    document.getElementById("fillSpell").addEventListener("click", fillSpell);
+    document.getElementById("fillDeity").addEventListener("click", fillDeity);
 
     // Set up the key press event listener
     document.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
-        fillSpell();
+        fillDeity();
       }
     });
   });
